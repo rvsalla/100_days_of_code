@@ -1,0 +1,1 @@
+print("Hello World " + input("put some texte here: "))
