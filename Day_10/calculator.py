@@ -1,5 +1,4 @@
 def format_name(fname, lname):
-    full_name = fname.title() + ' ' + lname.title()
-    print (full_name)
+    return f"{fname.title()} {lname.title()}"
 
-format_name('LEO', 'nasdaK')
+print(format_name('LEO', 'nasdaK'))
