@@ -1,3 +1,3 @@
-a = 'banana'
-a[0] = "B"
-print(a)
+import random
+
+print(random.randrange(1,100))
