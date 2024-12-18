@@ -24,11 +24,11 @@ def dificulty_check (dificulty):
         print("Choose a valida option!\n")
         return 0
 
-def guess_check(number, guess, att):
-    if guess == number:
-        print("\nCongratulations you won!\n")
+def guess_check(answer, guess, att):
+    if guess == answer:
+        print(f"\nCongratulations you won! The answer is {answer}!\n")
         return 0, True
-    elif number > guess:
+    elif answer > guess:
         print("\nToo low.")
         return att - 1, False
     else:
@@ -40,9 +40,9 @@ print("I'm thinking of a number between 1 and 100. \n")
 while attempts == 0:
     attempts = dificulty_check(input("Choose you dificulty: Type 'E' for easy mode or 'H' for hard mode: ").upper())
 
-number_to_guess = random.randrange(1,100)
+number_to_guess = random.randint(1,100)
 
-print(number_to_guess)
+#print(number_to_guess)
 
 while attempts > 0 :
     print(f"\nYou have {attempts} attempts remaining to guess the number.")
