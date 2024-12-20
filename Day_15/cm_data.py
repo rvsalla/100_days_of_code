@@ -14,6 +14,7 @@ LOGO = '''
 '''
 MENU = {
     "espresso": {
+        "option": "E",
         "ingredients": {
             "water": 50,
             "coffee": 18,
@@ -21,6 +22,7 @@ MENU = {
         "cost": 1.5,
     },
     "latte": {
+        "option": "L",
         "ingredients": {
             "water": 200,
             "milk": 150,
@@ -29,6 +31,7 @@ MENU = {
         "cost": 2.5,
     },
     "cappuccino": {
+        "option": "C",
         "ingredients": {
             "water": 250,
             "milk": 100,
