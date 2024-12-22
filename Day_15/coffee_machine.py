@@ -14,6 +14,20 @@ option_list = ['REPORT', 'OFF']
 for i,j in cm_data.MENU.items():
     option_list.append(j['option'])
 
+def check_resources(cl_option):
+    for drink,details in cm_data.MENU.items():
+        if details['option'] == cl_option:
+            if cm_data.resources ['water'] >= details['ingredients']['water'] and cm_data.resources ['milk'] >= details['ingredients']['milk'] and cm_data.resources ['coffee'] >= details['ingredients']['coffee']:
+                return True
+            else:
+                if cm_data.resources ['water'] < details['ingredients']['water']:
+                    print('Sorry there is not enough water.')
+                elif cm_data.resources ['milk'] < details['ingredients']['milk']:
+                    print('Sorry there is not enough milk.')
+                elif cm_data.resources ['coffee'] < details['ingredients']['coffee']:
+                    print('Sorry there is not enough coffee.')
+                return False
+
 client_option = ''
 
 #print(cm_data.resources)
@@ -44,4 +58,5 @@ while client_option != 'OFF':
                     print(f"{i}: {j}ml")
             print(f"Money: ${cm_data.money['value']}")
 
-        print(client_option)
+        #print(client_option)
+        check_resources(client_option)
