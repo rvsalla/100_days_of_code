@@ -18,7 +18,7 @@ def check_resources(cl_option):
     for drink,details in cm_data.MENU.items():
         if details['option'] == cl_option:
             if cm_data.resources ['water'] >= details['ingredients']['water'] and cm_data.resources ['milk'] >= details['ingredients']['milk'] and cm_data.resources ['coffee'] >= details['ingredients']['coffee']:
-                return True
+                return True, details['cost'], drink
             else:
                 if cm_data.resources ['water'] < details['ingredients']['water']:
                     print('Sorry there is not enough water.')
@@ -26,14 +26,26 @@ def check_resources(cl_option):
                     print('Sorry there is not enough milk.')
                 elif cm_data.resources ['coffee'] < details['ingredients']['coffee']:
                     print('Sorry there is not enough coffee.')
-                return False
+                return False,0,""
+
+def enter_money():
+    money = 0
+    print("\nPlease insert Coins:")
+    money += int(input("How many quarter?: "))* 0.25
+    money += int(input("How many dimes?: "))* 0.10
+    money += int(input("How many nickels?: "))* 0.05
+    money += int(input("How many pennys?: "))* 0.01
+    return round(money,2)
+
+def check_money(cl_money, d_cost):
+    if cl_money >= d_cost:
+        return True, cl_money - d_cost
+    else:
+        print("Sorry that,s not enough money. Money refounded!")
+        return False,0
 
 client_option = ''
 
-#print(cm_data.resources)
-#cm_data.resources['milk'] -= 100
-#print(cm_data.MENU['espresso']['option'])
-#def check_opption(c_option):
 
 while client_option != 'OFF':
     if client_option == 'OFF':
@@ -58,5 +70,12 @@ while client_option != 'OFF':
                     print(f"{i}: {j}ml")
             print(f"Money: ${cm_data.money['value']}")
 
-        #print(client_option)
-        check_resources(client_option)
+        resources_ok, drink_cost, drink_name = check_resources(client_option)
+
+        #enter money and check money
+        money_ok, change = check_money(enter_money(), drink_cost)
+        #make coffee
+        if money_ok:
+            if change > 0:
+                print(f"\nHere is ${change} in change.")
+            print(f"Here is your {drink_name} ☕ Enjoy!!")
