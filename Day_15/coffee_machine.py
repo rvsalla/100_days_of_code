@@ -18,7 +18,7 @@ def check_resources(cl_option):
     for drink,details in cm_data.MENU.items():
         if details['option'] == cl_option:
             if cm_data.resources ['water'] >= details['ingredients']['water'] and cm_data.resources ['milk'] >= details['ingredients']['milk'] and cm_data.resources ['coffee'] >= details['ingredients']['coffee']:
-                return True, details['cost'], drink
+                return True, details['cost'], drink, cm_data.resources ['water'] - details['ingredients']['water'], cm_data.resources ['milk'] - details['ingredients']['milk'], cm_data.resources ['coffee'] - details['ingredients']['coffee']
             else:
                 if cm_data.resources ['water'] < details['ingredients']['water']:
                     print('Sorry there is not enough water.')
@@ -41,7 +41,7 @@ def check_money(cl_money, d_cost):
     if cl_money >= d_cost:
         return True, cl_money - d_cost
     else:
-        print("Sorry that,s not enough money. Money refounded!")
+        print("\nSorry that,s not enough money. Money refounded!")
         return False,0
 
 client_option = ''
@@ -69,13 +69,22 @@ while client_option != 'OFF':
                 else:
                     print(f"{i}: {j}ml")
             print(f"Money: ${cm_data.money['value']}")
+        elif client_option == 'OFF':
+            print("\nTurning of the machine!\n")
+        else:
+            resources_ok, drink_cost, drink_name, water_cost, milk_cost, coffee_cost = check_resources(client_option)
+            #enter money and check money
+            if resources_ok:
+                money_ok, change = check_money(enter_money(), drink_cost)
+                #make coffee
+                if money_ok:
+                    if change > 0:
+                        print(f"\nHere is ${change} in change.")
+                    print(f"Here is your {drink_name} ☕ Enjoy!!\n")
+                    cm_data.money['value'] +=  drink_cost
+                    cm_data.resources ['water'] = water_cost
+                    cm_data.resources ['milk'] = milk_cost
+                    cm_data.resources ['coffee'] = coffee_cost
+                    print(water_cost, milk_cost, coffee_cost)
 
-        resources_ok, drink_cost, drink_name = check_resources(client_option)
 
-        #enter money and check money
-        money_ok, change = check_money(enter_money(), drink_cost)
-        #make coffee
-        if money_ok:
-            if change > 0:
-                print(f"\nHere is ${change} in change.")
-            print(f"Here is your {drink_name} ☕ Enjoy!!")
