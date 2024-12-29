@@ -1,3 +1,3 @@
 import random
 
-print(random.randrange(1,100))
+print([random.randint(0,255),random.randint(0,255),random.randint(0,255)])

@@ -1,19 +1,22 @@
-from turtle import Turtle, Screen
-
-timmy = Turtle()
-timmy.shape("circle")
-timmy.color('red')
-for i in range(4):
-    timmy.forward(100)
-    timmy.right(90)
-#timmy.forward(100)
+import turtle
+import random
 
 
+t = turtle.Turtle()
+t.speed('fastest')
+turtle.colormode(255)
+t.penup()
+t.hideturtle()
 
+x = -220
+y = -220
 
+for i in range(10):
+    t.goto(x,y)
+    for j in range(10):
+        t.dot(30,(random.randint(0,255),random.randint(0,255),random.randint(0,255)))
+        t.forward(50)
+    y += 50
 
-
-
-
-screen = Screen()
+screen = turtle.Screen()
 screen.exitonclick()
