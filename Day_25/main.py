@@ -33,9 +33,12 @@ while len(correct_ansewer) < len(states_data):
             lable.goto(row["x"], row["y"])
             lable.write(row["state"], font=('courrier', 8))
 
-for index, row in states_data.iterrows():
-    if row["state"] not in correct_ansewer:
-        missing_states.append(row["state"])
+#for index, row in states_data.iterrows():
+#    if row["state"] not in correct_ansewer:
+#        missing_states.append(row["state"])
+
+missing_states = [row["state"] for index, row in states_data.iterrows() if row["state"] not in correct_ansewer]
+
 
 states_to_learn_df = pd.DataFrame(missing_states, columns=["states_to_learn"])
 states_to_learn_df.to_csv(".\Day_25\states_to_learn.csv", index=False)
